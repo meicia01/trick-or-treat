@@ -1,1 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trick or Treat</title>
+    <style>
+        body {
+            font-family: 'Creepster', cursive;
+            text-align: center;
+            background-color: black;
+            background-image: url('halloween-bg.jpg'); /* A spooky Halloween background image */
+            background-size: cover;
+            color: white;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        .intro {
+            font-size: 3em; /* Larger font */
+            margin-top: 20px;
+        }
+        .treat {
+            color: orange;
+            text-shadow: 3px 3px 5px black;
+            background-image: url('sweets.png'); /* Image of sweets */
+            background-repeat: no-repeat;
+            background-position: center;
+            padding: 20px;
+        }
+        .trick {
+            color: red;
+            text-shadow: 3px 3px 5px black;
+            background-image: url('blood.png'); /* Image of blood effect */
+            background-repeat: no-repeat;
+            background-position: center;
+            padding: 20px;
+        }
+        .result {
+            display: none;
+        }
+        .treat-result, .trick-result {
+            margin-top: 50px;
+            font-size: 4em; /* Larger font */
+        }
+        .pumpkin {
+            width: 300px; /* Bigger pumpkin image */
+            height: auto;
+        }
+        .jump-scare {
+            width: 300px; /* Bigger jump scare */
+            display: none;
+        }
+        button {
+            margin-top: 20px;
+            padding: 15px 30px;
+            font-size: 1.5em; /* Larger button */
+            background-color: orange;
+            border: none;
+            color: black;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: darkorange;
+        }
+    </style>
+</head>
+<body>
 
+<div class="intro">
+    Did you get a <span class="treat">treat</span> or did you get <span class="trick">trick?</span>
+</div>
+<button id="findOutBtn" onclick="checkOutcome()">Find Out</button>
+
+<!-- Treat Result -->
+<div class="result treat-result">
+    <img src="pumpkin-with-sweets.png" alt="Pumpkin" class="pumpkin">
+    <p>YOU GOT A TREAT!</p>
+</div>
+
+<!-- Trick Result (Jump scare) -->
+<div class="result trick-result">
+    <img src="jump-scare.gif" alt="Jump Scare" class="jump-scare">
+</div>
+
+<script>
+function checkOutcome() {
+    // Disable the button to prevent multiple clicks
+    document.getElementById('findOutBtn').disabled = true;
+
+    // Randomly pick treat or trick
+    const isTreat = Math.random() >= 0.5;
+
+    document.querySelector('.intro').style.display = 'none';
+    
+    if (isTreat) {
+        document.querySelector('.treat-result').style.display = 'block';
+    } else {
+        document.querySelector('.trick-result').style.display = 'block';
+        setTimeout(function() {
+            document.querySelector('.jump-scare').style.display = 'block';
+        }, 2000); // Delayed jump scare
+    }
+}
+</script>
+
+</body>
+</html>
